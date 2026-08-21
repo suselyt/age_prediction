@@ -1,0 +1,8 @@
+node_modules/
+.venv/
+*.pkl
+.env
+__pycache__/
+.next/
+roadmap.md
+databases.txt
