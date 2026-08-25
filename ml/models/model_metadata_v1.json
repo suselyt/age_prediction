@@ -1,0 +1,92 @@
+{
+  "model_version": "v1",
+  "training_date": "2026-08-25",
+  "feature_names": [
+    "bone_density",
+    "vision_sharpness",
+    "hearing_ability",
+    "physical_activity_level",
+    "smoking_status",
+    "alcohol_consumption",
+    "diet",
+    "mental_health_status",
+    "sleep_patterns",
+    "stress_levels",
+    "income_level"
+  ],
+  "ordinal_maps": {
+    "physical_activity_level": {
+      "Low": 0,
+      "Moderate": 1,
+      "High": 2
+    },
+    "alcohol_consumption": {
+      "None": 0,
+      "Occasional": 1,
+      "Frequent": 2
+    },
+    "mental_health_status": {
+      "Poor": 0,
+      "Fair": 1,
+      "Good": 2,
+      "Excellent": 3
+    },
+    "income_level": {
+      "Low": 0,
+      "Medium": 1,
+      "High": 2
+    }
+  },
+  "nominal_cols": [
+    "smoking_status",
+    "diet",
+    "sleep_patterns"
+  ],
+  "target_column": "age",
+  "training_metrics": {
+    "mae": 4.789032459259033,
+    "r2": 0.9088882207870483
+  },
+  "model_params": {
+    "objective": "reg:squarederror",
+    "base_score": null,
+    "booster": null,
+    "callbacks": null,
+    "colsample_bylevel": null,
+    "colsample_bynode": null,
+    "colsample_bytree": null,
+    "device": null,
+    "early_stopping_rounds": null,
+    "enable_categorical": true,
+    "eval_metric": null,
+    "feature_types": null,
+    "feature_weights": null,
+    "gamma": null,
+    "grow_policy": null,
+    "importance_type": null,
+    "interaction_constraints": null,
+    "learning_rate": 0.1,
+    "max_bin": null,
+    "max_cat_threshold": null,
+    "max_cat_to_onehot": null,
+    "max_delta_step": null,
+    "max_depth": 6,
+    "max_leaves": null,
+    "min_child_weight": null,
+    "missing": NaN,
+    "monotone_constraints": null,
+    "multi_strategy": null,
+    "n_estimators": 200,
+    "n_jobs": null,
+    "num_parallel_tree": null,
+    "random_state": null,
+    "reg_alpha": null,
+    "reg_lambda": null,
+    "sampling_method": null,
+    "scale_pos_weight": null,
+    "subsample": null,
+    "tree_method": null,
+    "validate_parameters": null,
+    "verbosity": null
+  }
+}
