@@ -31,13 +31,13 @@ export default function Home() {
           <div className="mt-8 flex flex-col items-center gap-4 md:flex-row md:justify-center lg:justify-start">
             <Link
               href="/quiz"
-              className="rounded-lg bg-blue-600 px-6 py-3 text-white transition-colors hover:bg-blue-700"
+              className="rounded-lg bg-emerald-600 px-6 py-3 text-white transition-colors hover:bg-emerald-700"
             >
               Play
             </Link>
 
             <Link
-              href="/how-to-play"
+              href="/about"
               className="rounded-lg border border-gray-300 bg-white px-6 py-3 text-gray-700 transition-colors hover:bg-gray-100"
             >
               How to play

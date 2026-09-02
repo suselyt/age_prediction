@@ -9,10 +9,10 @@ export default function Footer() {
         <div className="flex gap-6">
           {/* GitHub Link */}
           <a
-            href="https://github.com/YOUR_USERNAME"
+            href="https://github.com/suselyt"
             target="_blank"
             rel="noopener noreferrer"
-            className="flex items-center gap-2 text-sm text-gray-600 hover:text-gray-900"
+            className="flex items-center gap-2 text-sm text-gray-600 hover:text-emerald-900"
           >
             <svg
               className="size-5"
@@ -31,8 +31,8 @@ export default function Footer() {
 
           {/* Email Link */}
           <a
-            href="mailto:YOUR_EMAIL@example.com"
-            className="flex items-center gap-2 text-sm text-gray-600 hover:text-gray-900"
+            href="mailto:susely.dev@gmail.com"
+            className="flex items-center gap-2 text-sm text-gray-600 hover:text-emerald -900"
           >
             <svg
               className="size-5"
