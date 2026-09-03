@@ -1,6 +1,7 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-from schemas import PredictRequest, PredictResponse
+from schemas import PredictRequest, PredictResponse, FeedbackRequest
+from feedback_logic import save_feedback
 from model.predict import predict_age
 
 app = FastAPI(title="Age Guesser API")
@@ -18,10 +19,14 @@ app.add_middleware(
 def health_check():
     return {"status": "ok", "message": "Age Guesser API running"}
 
-
 # prediction endpoint
 @app.post("/predict", response_model=PredictResponse)
 def predict(request: PredictRequest):
     # convert request to dict
     data = request.model_dump()
     return predict_age(data)
+
+# feedback endpoing
+@app.post("/feedback")
+def feedback(data: FeedbackRequest):
+    return save_feedback(data)
