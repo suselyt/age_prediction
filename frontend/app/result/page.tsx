@@ -2,16 +2,22 @@
 
 import { useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
-import { PredictResponse, QuizAnswers } from "@/types/quiz";
+import { PredictResponse} from "@/types/quiz";
 import { submitQuiz } from "@/lib/api";
+import { Suspense } from "react";
 
 export default function ResultPage() {
+    return (
+        <Suspense fallback={<div>Loading...</div>}>
+            <ResultContent />
+        </Suspense>
+    )
+}
+
+function ResultContent() {
     // takes the data from the url
     const searchParams = useSearchParams();
     const answersString = searchParams.get("answers");
-    const answers: QuizAnswers | null = answersString
-        ? JSON.parse(answersString)
-        : null;
 
     const [prediction, setPrediction] = useState<PredictResponse | null>(null);
     const [loading, setLoading] = useState(true);
@@ -19,17 +25,18 @@ export default function ResultPage() {
 
     // call predict API
     useEffect(() => {
-        if(!answers) {
+        if(!answersString) {
             setError("No quiz data found");
             setLoading(false);
             return;
         }
-
+        
+        const answers = JSON.parse(answersString);
         submitQuiz(answers)
-        .then((data) => setPrediction(data))
-        .catch((err) => setError(err.message))
-        .finally(() => setLoading(false));
-    }, [answers]);
+            .then((data) => setPrediction(data))
+            .catch((err) => setError(err.message))
+            .finally(() => setLoading(false));
+    }, [answersString]);
 
     if (loading) return <div>Calculatinf your biological age...</div>;
     if (error) return <div>Error: {error}</div>;
