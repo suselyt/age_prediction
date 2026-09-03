@@ -1,13 +1,46 @@
-export default function resultPage() {
+"use client";
+
+import { useSearchParams } from "next/navigation";
+import { useEffect, useState } from "react";
+import { PredictResponse, QuizAnswers } from "@/types/quiz";
+import { submitQuiz } from "@/lib/api";
+
+export default function ResultPage() {
+    // takes the data from the url
+    const searchParams = useSearchParams();
+    const answersString = searchParams.get("answers");
+    const answers: QuizAnswers | null = answersString
+        ? JSON.parse(answersString)
+        : null;
+
+    const [prediction, setPrediction] = useState<PredictResponse | null>(null);
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState<string | null>(null);
+
+    // call predict API
+    useEffect(() => {
+        if(!answers) {
+            setError("No quiz data found");
+            setLoading(false);
+            return;
+        }
+
+        submitQuiz(answers)
+        .then((data) => setPrediction(data))
+        .catch((err) => setError(err.message))
+        .finally(() => setLoading(false));
+    }, [answers]);
+
+    if (loading) return <div>Calculatinf your biological age...</div>;
+    if (error) return <div>Error: {error}</div>;
+ 
     return (
         <main className="flex flex-col items-center justify-center min-h-screen px-4 py-16">
             <div className="text-center space-y-6">
                 <h2 className="text-2xl font-semibold text-gray-700">Your Biological Age Is...</h2>
-                {/* NEEDS TO BE PASSED AS A VARIABLE */}
-                <p className="text-7xl font-bold text-emerald-600">ANSWER</p>
-                {/* NEEDS TO BE PASSED AS A VARIABLE */}
-                <p className="text-lg text-gray-600">Confidence Range:</p>
-                <p className="text-lg text-gray-700">Based on your lifestyle you appear to be around X years old!</p>
+                <p className="text-7xl font-bold text-emerald-600">{prediction?.predicted_age}</p>
+                <p className="text-lg text-gray-600">Confidence Range: {prediction?.confidence_range}</p>
+                <p className="text-lg text-gray-700">{prediction?.message}</p>
             </div>
 
             {/* feedback section */}
