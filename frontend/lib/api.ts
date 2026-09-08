@@ -1,4 +1,4 @@
-import { PredictResponse, QuizAnswers } from "@/types/quiz";
+import { PredictResponse, QuizAnswers, FeedbackPayload } from "@/types/quiz";
 
 const API_URL = process.env.NEXT_PUBLIC_API_URL;
 
@@ -26,3 +26,25 @@ export async function submitQuiz(answers: QuizAnswers): Promise<PredictResponse>
         throw error;
     }
 }
+
+export async function submitFeedback(payload: FeedbackPayload): Promise<void> {
+    try {
+        const response = await fetch(`${API_URL}/feedback`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(payload)
+        });
+
+        if (!response.ok){
+            throw new Error(`HTTP error! Status: ${response.status}`);
+        }
+        await response.json();
+
+    } catch(error) {
+        console.error(`Error submitting feedback:`, error);
+        throw error;
+    }
+}
+ 

@@ -17,3 +17,10 @@ export interface PredictResponse {
   confidence_range: string;
   message: string;
 }
+
+export interface FeedbackPayload {
+  features: QuizAnswers;
+  predicted_age: number;
+  actual_age: number | null;
+  feedback_type: "very_accurate" | "close" | "not_accurate";
+}
