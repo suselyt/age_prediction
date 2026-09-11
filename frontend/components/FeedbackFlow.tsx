@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import toast from "react-hot-toast";
 import { QuizAnswers, PredictResponse, FeedbackPayload } from "@/types/quiz";
 import { submitFeedback } from "@/lib/api";
 import AgeInputModal from "./AgeInputModal";
@@ -31,6 +32,7 @@ export default function FeedbackFlow({features, prediction, onSubmitSuccess}: Fe
             try{
                 await submitFeedback(payload);
                 onSubmitSuccess?.()
+                toast.success('Thanks for your feedback !')
             } catch(error) {
                 console.error("Failed to submit feedback:", error)
             }
@@ -57,6 +59,7 @@ export default function FeedbackFlow({features, prediction, onSubmitSuccess}: Fe
             await submitFeedback(payload);
             setShowModal(false);
             onSubmitSuccess?.();
+            toast.success('Thanks for your feedback !')
         } catch(error) {
             console.error("Failed to submit feedback:", error);
         }
