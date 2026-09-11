@@ -33,6 +33,12 @@ export default function FeedbackFlow({features, prediction, onSubmitSuccess}: Fe
                 await submitFeedback(payload);
                 onSubmitSuccess?.()
                 toast.success('Thanks for your feedback !')
+
+                // to avoid double feedback the feedback buttons get hidden
+                const feedback_buttons = document.getElementById('feedback_buttons');
+                if (feedback_buttons){
+                    feedback_buttons.style.display = 'none';
+                }
             } catch(error) {
                 console.error("Failed to submit feedback:", error)
             }
@@ -60,6 +66,12 @@ export default function FeedbackFlow({features, prediction, onSubmitSuccess}: Fe
             setShowModal(false);
             onSubmitSuccess?.();
             toast.success('Thanks for your feedback !')
+
+            // to avoid double feedback the feedback buttons get hidden
+            const feedback_buttons = document.getElementById('feedback_buttons');
+            if (feedback_buttons){
+                feedback_buttons.style.display = 'none';
+            }
         } catch(error) {
             console.error("Failed to submit feedback:", error);
         }
@@ -68,7 +80,7 @@ export default function FeedbackFlow({features, prediction, onSubmitSuccess}: Fe
     return (
         <>
         {/* feedback buttons */}
-            <div className="mt-12 text-center">
+            <div id="feedback_buttons" className="mt-12 text-center">
                 <p className="text-lg font-medium text-gray-700 mb-4">How accurate was this?</p>
                 <div className="flex gap-1">
                     <button onClick={() => handleFeedbackClick("very_accurate")} 
