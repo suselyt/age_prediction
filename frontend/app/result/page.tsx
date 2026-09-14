@@ -6,6 +6,8 @@ import { PredictResponse} from "@/types/quiz";
 import { submitQuiz } from "@/lib/api";
 import { Suspense } from "react";
 import FeedbackFlow from "@/components/FeedbackFlow";
+import toast from "react-hot-toast";
+import Link from "next/link";
 
 export default function ResultPage() {
     return (
@@ -61,8 +63,12 @@ function ResultContent() {
 
             {/* play again & share results buttons */}
             <div className="mt-8 flex gap-4">
-                <button className="px-6 py-3 bg-emerald-700 text-white rounded-lg hover:bg-emerald-800 transition-colors">Play Again</button>
-                <button className="px-6 py-3 border-2 border-emerald-700 text-emerald-700 rounded-lg hover:bg-emerald-50 transition-colors">Share Result</button>
+                <Link href="/quiz"
+                    className="px-6 py-3 bg-emerald-700 text-white rounded-lg hover:bg-emerald-800 transition-colors">Play Again
+                </Link>
+                <button onClick={() => {navigator.clipboard.writeText(window.location.href), toast.success('Link copied to clipboard')}}
+                    className="px-6 py-3 border-2 border-emerald-700 text-emerald-700 rounded-lg hover:bg-emerald-50 transition-colors">Share Result
+                </button>
             </div>
         </main>
     )
