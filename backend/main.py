@@ -1,8 +1,9 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-from schemas import PredictRequest, PredictResponse, FeedbackRequest
+
 from feedback_logic import save_feedback
 from model.predict import predict_age
+from schemas import FeedbackRequest, PredictRequest, PredictResponse
 
 app = FastAPI(title="Age Guesser API")
 

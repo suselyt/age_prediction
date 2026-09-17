@@ -1,5 +1,7 @@
+from typing import Literal
+
 from pydantic import BaseModel, model_validator
-from typing import Optional, Literal
+
 
 class PredictRequest(BaseModel):
     bone_density: float
@@ -22,7 +24,7 @@ class PredictResponse(BaseModel):
 class FeedbackRequest(BaseModel):
     features: PredictRequest
     predicted_age: int
-    actual_age: Optional[int] = None
+    actual_age: int | None = None
     feedback_type: Literal["very_accurate", "close", "not_accurate"]
 
     @model_validator(mode='after')

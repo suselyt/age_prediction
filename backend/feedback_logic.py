@@ -1,5 +1,6 @@
-import os, csv
-from datetime import datetime
+import csv
+import os
+from datetime import datetime, timezone
 from schemas import FeedbackRequest
 
 def save_feedback(data: FeedbackRequest):
@@ -12,7 +13,7 @@ def save_feedback(data: FeedbackRequest):
         user_responses_path = os.path.join(os.path.dirname(__file__), "..", "data", "feedback", "user_responses.csv")
 
         row = {
-            "timestamp": datetime.now().isoformat(),
+            "timestamp": datetime.now(timezone.utc).isoformat(),
             **data.features.model_dump(),
             "predicted_age": data.predicted_age,
             "actual_age": data.actual_age if data.actual_age is not None else "",
@@ -28,4 +29,4 @@ def save_feedback(data: FeedbackRequest):
 
         return {"status": "success", "message": "Thanks for your feedback!"}
     except Exception as e:
-        raise RuntimeError(f"Failed to save feedback: {str(e)}") from e
+        raise RuntimeError(f"Failed to save feedback: {e!s}") from e
