@@ -28,19 +28,16 @@ function ResultContent() {
 
     // call predict API
     useEffect(() => {
-        if(!answersString) {
-            setError("No quiz data found");
-            setLoading(false);
-            return;
+        if (answersString) {
+            const answers = JSON.parse(answersString);
+            submitQuiz(answers)
+                .then((data) => setPrediction(data))
+                .catch((err) => setError(err.message))
+                .finally(() => setLoading(false));
         }
-        
-        const answers = JSON.parse(answersString);
-        submitQuiz(answers)
-            .then((data) => setPrediction(data))
-            .catch((err) => setError(err.message))
-            .finally(() => setLoading(false));
     }, [answersString]);
 
+    if (!answersString) return <div>Error: No quiz data found</div>;
     if (loading) return <div>Calculating your biological age...</div>;
     if (error) return <div>Error: {error}</div>;
 
@@ -66,7 +63,11 @@ function ResultContent() {
                 <Link href="/quiz"
                     className="px-6 py-3 bg-emerald-700 text-white rounded-lg hover:bg-emerald-800 transition-colors">Play Again
                 </Link>
-                <button onClick={() => {navigator.clipboard.writeText(window.location.href), toast.success('Link copied to clipboard')}}
+                <button 
+                    onClick={() => {
+                        navigator.clipboard.writeText(window.location.href);
+                        toast.success('Link copied to clipboard');
+                    }}
                     className="px-6 py-3 border-2 border-emerald-700 text-emerald-700 rounded-lg hover:bg-emerald-50 transition-colors">Share Result
                 </button>
             </div>
