@@ -56,7 +56,7 @@ export default function QuizPage() {
         <div className="flex items-center justify-center">
           <div className="relative aspect-square w-full max-w-md overflow-hidden rounded-lg bg-gray-100">
             <Image
-              src="/placeholder.jpg"
+              src="/rabbit-draw.png"
               alt="Quiz illustration"
               fill
               className="object-cover"

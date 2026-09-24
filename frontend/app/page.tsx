@@ -5,11 +5,11 @@ export default function Home() {
   return (
     <main className="flex flex-1 items-center justify-center py-16">
       <div className="container mx-auto grid grid-cols-1 items-center gap-12 px-4 md:grid-cols-2">
-        {/* LEFT - Image Placeholder */}
+        {/* LEFT - Image rabbit-draw.png */}
         <div className="flex items-center justify-center">
           <div className="relative aspect-square w-full max-w-md overflow-hidden rounded-lg bg-gray-200">
             <Image
-              src="/placeholder.jpg"
+              src="/rabbit-draw.png"
               alt="Age Guesser illustration"
               fill
               className="object-cover"
