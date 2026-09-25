@@ -123,11 +123,11 @@ Every piece of user feedback (including their real age) is appended to `data/fee
 
 | Landing page | Quiz |
 |---|---|
-| `docs/screenshots/landing.png` | `docs/screenshots/quiz.png` |
+| ![Landing page](docs/screenshots/landing.png) | ![Quiz](docs/screenshots/quiz.png) |
 
 | Result page | About |
 |---|---|
-| `docs/screenshots/result.png` | `docs/screenshots/about.png` |
+| ![Result](docs/screenshots/result.png) | ![About](docs/screenshots/about.png) |
 
 ---
 
